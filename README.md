@@ -682,7 +682,7 @@ source hexstrike-dev/bin/activate
 pip install -r requirements.txt
 
 # 4. Start development server
-1).
+# 1).
 python3 hexstrike_server.py --port 8888 --debug
 
 ```
