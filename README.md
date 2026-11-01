@@ -671,8 +671,8 @@ We welcome contributions from the cybersecurity and AI community!
 
 ```bash
 # 1. Fork and clone the repository
-git clone https://github.com/0x4m4/hexstrike-ai.git
-cd hexstrike-ai
+git clone https://github.com/luziyao504/hexstrikemcp.git
+cd hexstrikemcp
 
 # 2. Create development environment
 python3 -m venv hexstrike-dev
@@ -682,8 +682,12 @@ source hexstrike-dev/bin/activate
 pip install -r requirements.txt
 
 # 4. Start development server
+1).
 python3 hexstrike_server.py --port 8888 --debug
+
 ```
+1) or "python3 hexstrike_server.py --debug"    --Explanation: First, execute the service server (hexstrike_server), and then execute mcp (hexstrike_mcp)
+2) Execute hexstrike_mcp -- "python3 hexstrike_mcp.py --server http://localhost:8888"
 
 ### Priority Areas for Contribution
 

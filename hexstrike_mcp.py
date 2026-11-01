@@ -5459,7 +5459,27 @@ def main():
         mcp = setup_mcp_server(hexstrike_client)
         logger.info("🚀 Starting HexStrike AI MCP server")
         logger.info("🤖 Ready to serve AI agents with enhanced cybersecurity capabilities")
-        mcp.run()
+        #mcp.run()
+        import uvicorn
+        from starlette.middleware import Middleware
+        from starlette.middleware.base import BaseHTTPMiddleware
+        from starlette.requests import Request
+
+        class AcceptHeaderMiddleware(BaseHTTPMiddleware):
+            async def dispatch(self, request: Request, call_next):
+                if request.url.path == "/mcp":
+                    headers = request.scope.get("headers", [])
+                    new_headers = []
+                    for k, v in headers:
+                        if k.lower() == b"accept" and b"text/event-stream" not in v:
+                            v += b", text/event-stream"
+                        new_headers.append((k, v))
+                    request.scope["headers"] = new_headers
+                return await call_next(request)
+
+        app = mcp.streamable_http_app()
+        app.add_middleware(AcceptHeaderMiddleware)
+        uvicorn.run(app, host="0.0.0.0", port=8889)
     except Exception as e:
         logger.error(f"💥 Error starting MCP server: {str(e)}")
         import traceback
