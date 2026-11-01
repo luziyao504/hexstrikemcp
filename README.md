@@ -116,7 +116,7 @@ graph TD
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/0x4m4/hexstrike-ai.git
+git clone https://github.com/luziyao504/hexstrikemcp.git
 cd hexstrike-ai
 
 # 2. Create virtual environment
@@ -687,7 +687,7 @@ python3 hexstrike_server.py --port 8888 --debug
 
 ```
 1) or "python3 hexstrike_server.py --debug"    --Explanation: First, execute the service server (hexstrike_server), and then execute mcp (hexstrike_mcp)
-2) Execute hexstrike_mcp -- "python3 hexstrike_mcp.py --server http://localhost:8888"
+2) Execute hexstrike_mcp --Execute in a new terminal "python3 hexstrike_mcp.py --server http://localhost:8888"
 
 ### Priority Areas for Contribution
 
