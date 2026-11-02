@@ -274,7 +274,8 @@ def setup_mcp_server(hexstrike_client: HexStrikeClient) -> FastMCP:
     Returns:
         Configured FastMCP instance
     """
-    mcp = FastMCP("hexstrike-ai-mcp")
+    #mcp = FastMCP("hexstrike-ai", host="0.0.0.0", port=8889)
+    mcp = FastMCP("hexstrike-ai", host="0.0.0.0", port=8889)
 
     # ============================================================================
     # CORE NETWORK SCANNING TOOLS
@@ -5459,12 +5460,11 @@ def main():
         mcp = setup_mcp_server(hexstrike_client)
         logger.info("🚀 Starting HexStrike AI MCP server")
         logger.info("🤖 Ready to serve AI agents with enhanced cybersecurity capabilities")
-        #mcp.run()
         import uvicorn
         from starlette.middleware import Middleware
         from starlette.middleware.base import BaseHTTPMiddleware
         from starlette.requests import Request
-
+        
         class AcceptHeaderMiddleware(BaseHTTPMiddleware):
             async def dispatch(self, request: Request, call_next):
                 if request.url.path == "/mcp":
@@ -5476,7 +5476,7 @@ def main():
                         new_headers.append((k, v))
                     request.scope["headers"] = new_headers
                 return await call_next(request)
-
+        
         app = mcp.streamable_http_app()
         app.add_middleware(AcceptHeaderMiddleware)
         uvicorn.run(app, host="0.0.0.0", port=8889)
